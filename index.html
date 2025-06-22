@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Potability Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message, .error, .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .message {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .result {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Water Potability Detector</h1>
+
+       
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <label for="file">Upload Dataset:</label>
+            <input type="file" name="file" id="file" accept=".csv" required>
+            <button type="submit">Upload and Train</button>
+        </form>
+
+        
+        <form method="POST" action="/">
+            <h2>Test Water Parameters</h2>
+            <label for="ph">pH:</label>
+            <input type="number" step="0.01" name="ph" id="ph" placeholder="e.g., 7.0 (Neutral water)" required><br>
+            <label for="hardness">Hardness:</label>
+            <input type="number" step="0.01" name="hardness" id="hardness" placeholder="e.g., 150.0 (Soft water below 150 ppm)" required><br>
+            <label for="solids">Solids:</label>
+            <input type="number" step="0.01" name="solids" id="solids" placeholder="e.g., 2000.0 (TDS in ppm)" required><br>
+            <label for="chloramines">Chloramines:</label>
+            <input type="number" step="0.01" name="chloramines" id="chloramines" placeholder="e.g., 2.0 (mg/L)" required><br>
+            <label for="sulfate">Sulfate:</label>
+            <input type="number" step="0.01" name="sulfate" id="sulfate" placeholder="e.g., 250.0 (mg/L)" required><br>
+            <label for="conductivity">Conductivity:</label>
+            <input type="number" step="0.01" name="conductivity" id="conductivity" placeholder="e.g., 400.0 (uS/cm)" required><br>
+            <label for="organic_carbon">Organic Carbon:</label>
+            <input type="number" step="0.01" name="organic_carbon" id="organic_carbon" placeholder="e.g., 12.0 (mg/L)" required><br>
+            <label for="trihalomethanes">Trihalomethanes:</label>
+            <input type="number" step="0.01" name="trihalomethanes" id="trihalomethanes" placeholder="e.g., 0.2 (mg/L)" required><br>
+            <label for="turbidity">Turbidity:</label>
+            <input type="number" step="0.01" name="turbidity" id="turbidity" placeholder="e.g., 1.0 (NTU)" required><br>
+            <button type="submit" id="predictButton">Predict Potability</button>
+        </form>
+
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        {% if result %}
+        <div class="result">{{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
