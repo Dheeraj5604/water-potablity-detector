@@ -26,7 +26,7 @@ Installation
 
 1. Clone the repository:
    bash
-   git clone https://github.com/Dheeraj5604/water-potability-predictor.git
+   git clone https://github.com/Dheeraj5604/water-potability-detector.git
    cd water-potability-predictor
    
 
